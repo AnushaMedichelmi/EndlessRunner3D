@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,8 +11,11 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     bool IsGrounded = true;
     public int score;
+    public Text scoreText;
+    public int speedToIncrease;
 
-    
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -28,11 +32,19 @@ public class PlayerController : MonoBehaviour
         }
 
         //score=transform.position.x;
-        Debug.Log(Mathf.FloatToHalf(transform.position.x));
-       
+        score = Mathf.FloorToInt(transform.position.x);
+        scoreText.text = score.ToString();
+        if (score == speedToIncrease)
+        {
+            playerSpeed = playerSpeed + 2;
+            speedToIncrease = speedToIncrease + 10;
+        }
+
+
+
     }
 
-    
+
     private void FixedUpdate()
     {
         rb.velocity = new Vector3(playerSpeed, rb.velocity.y, rb.velocity.z);
@@ -41,6 +53,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Platform")
             IsGrounded = true;
+
+       
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -48,6 +62,7 @@ public class PlayerController : MonoBehaviour
         {
             
             Destroy(this.gameObject);
+          
             
         }
 
