@@ -43,3 +43,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: forground
+    uniqueID: 2592964109
+    locked: 0
