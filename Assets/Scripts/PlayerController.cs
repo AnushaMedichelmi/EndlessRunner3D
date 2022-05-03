@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,13 +14,18 @@ public class PlayerController : MonoBehaviour
     public int score;
     public Text scoreText;
     public int speedToIncrease;
+    public Button quit;
+    public Button playagain;
+    ScoreCalculator calculator;
 
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-       
+        quit.onClick.AddListener(QuitTheGame);
+        playagain.onClick.AddListener(RestartTheGame);
+
     }
 
     // Update is called once per frame
@@ -68,5 +74,16 @@ public class PlayerController : MonoBehaviour
 
     }
 
-  
+    private void RestartTheGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void QuitTheGame()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+
+
 }
